@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Claude Mouse Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin-top: 100px;
+    }
+
+    
+    button {
+        padding: 15px 30px;
+        font-size: 18px;
+        margin: 20px;
+        cursor: pointer;
+        background: #008e5f;
+        border-radius: 4px;
+        color: white;
+        font-weight: 700;
+    }
+
+    #message {
+      margin-top: 40px;
+      font-size: 20px;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <h1>Claude Mouse Interaction Demo</h1>
+  <button id="downloadBtn">Download Cat</button>
+  <button id="clearBtn">Clear</button>
+
+  <div id="message"></div>
+
+  <script>
+    document.getElementById("downloadBtn").addEventListener("click", () => {
+      fetch("/download_cat", { method: "POST" })
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("message").innerText = data.message;
+        });
+    });
+
+    document.getElementById("clearBtn").addEventListener("click", () => {
+      fetch("/clear", { method: "POST" })
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("message").innerText = data.message;
+        });
+    });
+  </script>
+</body>
+</html>
